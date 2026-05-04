@@ -23,14 +23,13 @@ const regester = asyncWrapper(async (req, res, next) => {
     const { firstName, lastName, email, password, role } = req.body;
 
     const securedPasswoerd = await bcrypt.hash(password, 10);
-
     const userData = new userModle({
         firstName,
         lastName,
         email,
         password: securedPasswoerd,
         role,
-        avatar: req.file.filename
+        avatar: req.file ? req.file.filename : null
     });
 
     await userData.save();
