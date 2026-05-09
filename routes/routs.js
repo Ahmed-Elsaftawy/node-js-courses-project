@@ -8,7 +8,7 @@ import { userRoles } from "../utils/users-roles.js";
 const router = express();
 
 router.route('/')
-    .get(verifyToken, verifyUserRole(userRoles.MANAGER), getAllCourses)
+    .get(verifyToken, verifyUserRole(userRoles.MANAGER, userRoles.ADMIN), getAllCourses)
     .post(
         [
             body('title').notEmpty().withMessage("titel is required"),
@@ -21,6 +21,6 @@ router.route('/')
 router.route('/:courseId')
     .get(verifyToken, getSingleCourse)
     .patch(verifyToken, updateCourse)
-    .delete(verifyToken, verifyUserRole(userRoles.ADMIN, userRoles.MANEGER), deleteCourse);
+    .delete(verifyToken, verifyUserRole(userRoles.ADMIN, userRoles.MANAGER), deleteCourse);
 
 export { router }

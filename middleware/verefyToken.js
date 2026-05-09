@@ -14,7 +14,6 @@ const verifyToken = (req, res, next) => {
 
     try {
         const currentUser = jwt.verify(token, process.env.JWT_PASSWORD);
-        // أهم سطر: نضع بيانات المستخدم في الطلب ليراها الـ verifyUserRole
         req.currentUser = currentUser;
         next();
     } catch (err) {

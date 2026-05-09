@@ -62,7 +62,11 @@ const login = asyncWrapper(async (req, res, next) => {
     const matchedPassword = await bcrypt.compare(password, user.password);
     if (user && matchedPassword) {
         //generate token
-        const token = await createToken({ email: user.email, _id: user.id, role: user.role });
+        const token = await createToken({
+            email: user.email,
+            _id: user._id,
+            role: user.role
+        });
         return res.json({ status: httpStatusText.SUCCESS, data: { token } })
     } else {
         const error = AppErrorHandler.create('something went wrong', 404, httpStatusText.FAIL);

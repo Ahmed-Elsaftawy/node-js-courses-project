@@ -21,8 +21,8 @@ const getSingleCourse = asyncWrapper(
         if (!courese) {
             const error = AppErrorHandler.create('course not found', 404, httpStatusText.FAIL);
             return next(error);
-            // res.status(404)
-            // return res.json({ status: httpStatusText.FAIL, data: { course: 'course not found' } });
+            res.status(404)
+            return res.json({ status: httpStatusText.FAIL, data: { course: 'course not found' } });
         }
         res.json({ status: httpStatusText.SUCCESS, data: { courese } });
 
